@@ -49,26 +49,68 @@
 #   valid_stops
 # end
 
-def solution(A,B,C):
-	A.sort(reverse=True)
-	B.sort(reverse= True)
-	C.sort(reverse= True)
-	index=0
-	result=0
-	while(index < len(A)):
-		result = result + iteratorMatriz(A[index],B)*iteratorMatriz(B[index],C)
-		index = index+1
-	print result
+# def solution(A,B,C):
+# 	A.sort(reverse=True)
+# 	B.sort(reverse= True)
+# 	C.sort(reverse= True)
+# 	index=0
+# 	result=0
+# 	while(index < len(A)):
+# 		result = result + iteratorMatriz(A[index],B)*iteratorMatriz(B[index],C)
+# 		index = index+1
+# 	print result
+#
+# def iteratorMatriz(min,mat):
+# 	cont=0
+# 	for x in mat:
+# 		if min<x:
+# 			cont = cont + 1
+# 		else:
+# 			break
+# 	return cont
+# end
+def solution(a,b,c)
+a.sort!
+b.sort!
+c.sort!
+count = a.length**3
 
-def iteratorMatriz(min,mat):
-	cont=0
-	for x in mat:
-		if min<x:
-			cont = cont + 1
-		else:
-			break
-	return cont
+i = 1
+p recursion(a,b,i)
+p recursion(b,c,i)
+p recursion(a,c,i)
+p "#{count} - #{( recursion(a,b,i) + recursion(b,c,i))}"
 end
-p solution([29, 50],[61,37],[37,70])
+
+def recursion(a,b,i)
+	result = check_minimum(a[-(i)], b)
+	    if check_minimum(a[-(i)], b) == 0
+        0
+			else
+				#p "a-i #{a[-(i+1)]} : #{i}"
+				if i == a.length
+					result
+				else
+					result + recursion(a,b,i+1)
+				end
+			end
+end
+
+def check_minimum(a1,b1)
+	ab = false
+	i = 0
+		while !ab
+			if  a1 < b1[i]
+				 ab = true
+			else
+				i += 1
+				if i == b1.length
+					ab = true
+				end
+			end
+		end
+		i
+end
+p solution([29, 50],[37,61],[37,70]) # 29 37 70   29 61 70  50 61 70    50
 puts "!!!!!!!!!"
 p solution([29, 29],[61, 61],[70, 70])
