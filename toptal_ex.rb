@@ -69,38 +69,54 @@
 # 			break
 # 	return cont
 # end
+require "pry"
+
 def solution(a,b,c)
 a.sort!
 b.sort!
 c.sort!
-count = a.length*3
+count = a.length**2
 
 i = 1
-recursion(a,b,i)
+#p recursion(a,b,i)
+#binding.pry
+count - (recursion(a,b,i))# * recursion(b,c,i))
+
 end
 
 def recursion(a,b,i)
-	    if check_minimum(a[-(i)], b) == 0
-        0
-			else
-				p "a-i #{a[-(i+1)]}"
-				recursion(a,b,i+1)
-			end
+  result = check_minimum(a[-(i)], b)
+  if  result == 0 || i == a.length
+    if result == a.length
+      i-1
+    else
+      i-1
+    end
+  else
+   # p "i #{-(i+1)}, a-i #{a[-(i+1)]}"
+      result + recursion(a,b,i+1)
+  end
 end
 
 def check_minimum(a1,b1)
-	ab = false
-	i = 0
-		while !ab
-			p "bi #{b1[i]}"
-			if a1 < b1[i]
-				 ab = true
-			else
-				i += 1
-			end
-		end
-		i
+  ab = true
+  i = 0
+    while ab
+      #binding.pry
+      if a1 < b1[i]
+         ab = false
+      else
+        i += 1
+        if i == b1.length
+          ab = false
+        end
+      end
+    end
+    p i
+    i
 end
-p solution([29, 50],[61,37],[37,70])
+p "!!!!!!!!!!!!!!!1"
+p solution([29, 50],[61 ,37],[37,70])
 puts "!!!!!!!!!"
 p solution([29, 29],[61, 61],[70, 70])
+
